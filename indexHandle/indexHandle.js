@@ -4,10 +4,12 @@
 var fs   = require("fs");
 
 exports.start = function (response,request){
-    fs.exists('/index.html',function(exists){
+    fs.exists('/root/apppush/index.html',function(exists){
+        console.log(exists);
+        console.log('ri');
         if(exists){
             response.writeHead(200, {"Content-Type": "text/html"});
-            fs.readFile('/index.html',function (err,data){
+            fs.readFile('/root/apppush/index.html',function (err,data){
                 response.write(data, "binary");
                 response.end();
             });
