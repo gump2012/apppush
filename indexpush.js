@@ -4,6 +4,7 @@
 var server = require("./server");
 var router = require("./router");
 var index = require("./indexHandle/indexHandle");
+var androidpush = require("./NodeProj/androidpush.js");
 
 var apn = require('apn');
 
@@ -25,3 +26,5 @@ note.alert = "\uD83D\uDCE7 \u2709 You have a new message";
 note.payload = {'messageFrom': 'Caroline'};
 
 apnConnection.pushNotification(note, myDevice);
+
+androidpush.androidpush();
