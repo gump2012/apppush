@@ -2,7 +2,7 @@ var Template = require("./TransmissionTemplate");
 
 var fs = require('fs')
 var p = require('node-protobuf').Protobuf
-var pb = new p(fs.readFileSync('GtReq.desc'))
+var pb = new p(fs.readFileSync('/root/apppush/NodeProj/GtReq.desc'))
 
 var request = require('request');
 
