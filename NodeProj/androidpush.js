@@ -10,7 +10,6 @@ var request = require('request');
 var APPID  = "sMgsNRPWgB6jjEvF52O7C8";
 var APPKEY = "GyfzBulXAd6J6QDzed8er";
 var MASTERSECRET = "YF7f1TEBRk9YX44sJJW7s9"
-var CID = "b3f71e0b8fe81507ee4ee3884ab86fc3"
 var URL = "http://sdk.open.api.igexin.com/apiex.htm"
 
 // Create TransmissionTemplate
@@ -57,20 +56,20 @@ function md5(text) {
 	return crypto.createHash('md5').update(text).digest('hex');
 };
 
-function pushMessageToSingle(){
+function pushMessageToSingle(deviceid,message){
 	request.post(
 			URL,
 			{ json:{
 			"action": "pushMessageToSingleAction",
 			"appkey": APPKEY,
 			"clientData": base64str,
-			"transmissionContent": "Here comes your content!",
+			"transmissionContent": message,
 			"isOffline": "false",
 			"offlineExpireTime": 0,
 			"appId": APPID,
 			"pushType": "pushTransmissionMsg",
 			"version":"3.0.0.0",
-			"clientId": CID,
+			"clientId": deviceid,
 			"type": template.type 
 			} },
 			function (error, response, body) {
@@ -82,10 +81,10 @@ function pushMessageToSingle(){
 };
 
 
-exports.androidpush = function(){
+exports.androidpush = function(deviceid,message){
 var startTime = new Date().getTime();
 auth();
-pushMessageToSingle();
+pushMessageToSingle(deviceid,message);
 var endTime = new Date().getTime();
 console.log("time used: "+ (endTime-startTime) + " ms");
 }
