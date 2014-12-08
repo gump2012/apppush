@@ -2,6 +2,7 @@
  * Created by gump on 12/8/14.
  */
 var publicTool = require('../publicTool/publicTools');
+var apn = require('apn');
 
 exports.iossend = function (datajson,response){
     if(datajson.message){
