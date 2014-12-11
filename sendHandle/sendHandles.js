@@ -13,17 +13,27 @@ exports.sendpush = function (response,request){
 
     request.addListener('end', function() {
         console.log(requestData);
-        var datajson = JSON.parse(requestData);
-        if(datajson){
-            if(datajson.deviceSysType === 'ios'){
-                iossend.iossend(datajson,response);
+        if(requestData){
+            var datajson;
+            try {
+                datajson = JSON.parse(requestData);
+                if(datajson){
+                    if(datajson.deviceSysType === 'ios'){
+                        iossend.iossend(datajson,response);
+                    }
+                    else if(datajson.deviceSysType === 'android'){
+                        androidsend.androidpush(datajson,response);
+                    }
+                    else{
+                        publicTool.returnErr(response,'没找到设备');
+                    }
+                }
+            } catch (e) {
+                // An error has occured, handle it, by e.g. logging it
+                console.log(e);
             }
-            else if(datajson.deviceSysType === 'android'){
-                androidsend.androidpush(datajson,response);
-            }
-            else{
-                publicTool.returnErr(response,'没找到设备');
-            }
+        }else{
+            publicTool.returnErr(response,'没有post数据');
         }
     });
 }
