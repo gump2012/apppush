@@ -12,6 +12,7 @@ exports.sendpush = function (response,request){
     });
 
     request.addListener('end', function() {
+        console.log(requestData);
         var datajson = JSON.parse(requestData);
         if(datajson){
             if(datajson.deviceSysType === 'ios'){
