@@ -25,6 +25,7 @@ exports.iossend = function (datajson,response){
 }
 
 function sendonepush(deviceid,message){
+    console.log('iii');
     var options = {cert:'/root/apppush/certificate/cert.pem',key:'/root/apppush/certificate/key.pem'};
 
     var apnConnection = new apn.Connection(options);
@@ -36,6 +37,10 @@ function sendonepush(deviceid,message){
     note.sound = "";
     note.alert = message;
     note.payload = {'messageFrom': 'Caroline'};
-
+    try{
     apnConnection.pushNotification(note, myDevice);
+}
+catch(e){
+console.log(e.description);
+}
 }

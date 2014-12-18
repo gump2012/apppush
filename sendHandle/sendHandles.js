@@ -30,6 +30,7 @@ exports.sendpush = function (response,request){
                 }
             } catch (e) {
                 // An error has occured, handle it, by e.g. logging it
+		console.log('ri');
                 console.log(e);
             }
         }else{
