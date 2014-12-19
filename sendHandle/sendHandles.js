@@ -4,6 +4,7 @@
 var publicTool = require('../publicTool/publicTools');
 var iossend = require('./iossend');
 var androidsend = require('./androidsend');
+var querystring = require("querystring");
 
 exports.sendpush = function (response,request){
     var requestData = '';
@@ -16,13 +17,13 @@ exports.sendpush = function (response,request){
         if(requestData){
             var datajson;
             try {
-                datajson = JSON.parse(requestData);
-                if(datajson){
+                var devicetype = querystring.parse(requestData).deviceSysType;
+                if(devicetype){
                     if(datajson.deviceSysType === 'ios'){
-                        iossend.iossend(datajson,response);
+                        iossend.iossend(requestData,response);
                     }
                     else if(datajson.deviceSysType === 'android'){
-                        androidsend.androidpush(datajson,response);
+                        androidsend.androidpush(requestData,response);
                     }
                     else{
                         publicTool.returnErr(response,'没找到设备');
