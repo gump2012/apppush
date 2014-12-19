@@ -8,12 +8,17 @@ var querystring = require("querystring");
 exports.iossend = function (datajson,response){
     var message = querystring.parse(datajson).message
     if(message){
-        var useridarr = querystring.parse(datajson).userid
-        if(useridarr &&
-                typeof useridarr == "array" &&
-            useridarr.length > 0){
-            for(var i = 0; i < useridarr.length; ++i){
-                var deviceid = useridarr[i];
+        var useridarr = querystring.parse(datajson).userid;
+        console.log(useridarr);
+        console.log(typeof useridarr);
+        var uarr = eval(useridarr);
+	console.log(uarr);
+	console.log(typeof uarr);
+        if(uarr &&
+            uarr.length > 0){
+            for(var i = 0; i < uarr.length; ++i){
+                var deviceid = uarr[i];
+                console.log('deviceid is '+deviceid);
                 sendonepush(deviceid,message);
             }
 
