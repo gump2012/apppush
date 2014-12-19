@@ -9,11 +9,7 @@ exports.iossend = function (datajson,response){
     var message = querystring.parse(datajson).message
     if(message){
         var useridarr = querystring.parse(datajson).userid;
-        console.log(useridarr);
-        console.log(typeof useridarr);
         var uarr = eval(useridarr);
-	console.log(uarr);
-	console.log(typeof uarr);
         if(uarr &&
             uarr.length > 0){
             for(var i = 0; i < uarr.length; ++i){
@@ -35,7 +31,6 @@ exports.iossend = function (datajson,response){
 }
 
 function sendonepush(deviceid,message){
-    console.log('iii');
     var options = {cert:'/root/apppush/certificate/cert.pem',key:'/root/apppush/certificate/key.pem'};
 
     var apnConnection = new apn.Connection(options);
@@ -53,4 +48,6 @@ function sendonepush(deviceid,message){
 catch(e){
 console.log(e.description);
 }
+
+    console.log('send message'+deviceid+':'+message);
 }
