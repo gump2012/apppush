@@ -19,15 +19,18 @@ exports.sendpush = function (response,request){
             try {
                 var devicetype = querystring.parse(requestData).deviceSysType;
                 if(devicetype){
-                    if(datajson.deviceSysType === 'ios'){
+                    if(devicetype === 'ios'){
                         iossend.iossend(requestData,response);
                     }
-                    else if(datajson.deviceSysType === 'android'){
+                    else if(devicetype === 'android'){
                         androidsend.androidpush(requestData,response);
                     }
                     else{
                         publicTool.returnErr(response,'没找到设备');
                     }
+                }
+                else{
+                    publicTool.returnErr(response,'没有设备类型');
                 }
             } catch (e) {
                 // An error has occured, handle it, by e.g. logging it
