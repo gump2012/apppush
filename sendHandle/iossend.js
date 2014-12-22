@@ -10,8 +10,11 @@ exports.iossend = function (datajson,response){
     if(message){
         var useridarr = querystring.parse(datajson).userid;
         var uarr = eval(useridarr);
+
         if(uarr &&
             uarr.length > 0){
+
+            var isnull = false;
             for(var i = 0; i < uarr.length; ++i){
                 var deviceid = uarr[i];
                 if(deviceid){
@@ -20,11 +23,14 @@ exports.iossend = function (datajson,response){
                 }
                 else{
                     publicTool.returnErr(response,'用户id为空');
+                    isnull = true;
                     break;
                 }
             }
+            if(!isnull){
+                publicTool.returnOK(response,'');
+            }
 
-            publicTool.returnOK(response,'');
         }
         else{
             publicTool.returnErr(response,'没有用户id');
