@@ -14,8 +14,14 @@ exports.iossend = function (datajson,response){
             uarr.length > 0){
             for(var i = 0; i < uarr.length; ++i){
                 var deviceid = uarr[i];
+                if(deviceid){
                 console.log('deviceid is '+deviceid);
                 sendonepush(deviceid,message);
+                }
+                else{
+                    publicTool.returnErr(response,'用户id为空');
+                    break;
+                }
             }
 
             publicTool.returnOK(response,'');
