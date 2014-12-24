@@ -43,7 +43,7 @@ exports.iossend = function (datajson,response){
 }
 
 function sendonepush(deviceid,message){
-    var options = {cert:'/root/apppush/certificate/cert.pem',key:'/root/apppush/certificate/key.pem'};
+    var options = {cert:'/root/apppush/certificate/cert.pem',key:'/root/apppush/certificate/key.pem',passphrase:'1111'};
 
     var apnConnection = new apn.Connection(options);
     var myDevice = new apn.Device(deviceid);
