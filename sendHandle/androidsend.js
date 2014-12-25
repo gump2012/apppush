@@ -3,6 +3,7 @@
  */
 var publicTool = require('../publicTool/publicTools');
 var androidpush = require("../NodeProj/androidpush.js");
+var querystring = require("querystring");
 
 exports.androidpush = function (datajson,response){
     var message = querystring.parse(datajson).message;
