@@ -5,11 +5,14 @@ var publicTool = require('../publicTool/publicTools');
 var androidpush = require("../NodeProj/androidpush.js");
 
 exports.androidpush = function (datajson,response){
-    if(datajson.message){
-        if(datajson.userid && datajson.userid.length > 0){
-            for(var i = 0; i < datajson.userid.length; ++i){
-                var deviceid = datajson.userid[i];
-                sendonepush(deviceid,datajson.message);
+    var message = querystring.parse(datajson).message
+    if(message){
+        var useridarr = querystring.parse(datajson).userid;
+        var uarr = eval(useridarr);
+        if(uarr && uarr.length > 0){
+            for(var i = 0; i < uarr.length; ++i){
+                var deviceid = uarr[i];
+                sendonepush(deviceid,message);
             }
 
             publicTool.returnOK(response,'');

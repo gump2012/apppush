@@ -11,8 +11,7 @@ exports.iossend = function (datajson,response){
         var useridarr = querystring.parse(datajson).userid;
         var uarr = eval(useridarr);
 
-        if(uarr &&
-            uarr.length > 0){
+        if(uarr && uarr.length > 0){
 
             var isnull = false;
             for(var i = 0; i < uarr.length; ++i){
