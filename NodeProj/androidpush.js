@@ -16,7 +16,7 @@ var URL = "http://sdk.open.api.igexin.com/apiex.htm"
 var template = new Template.TransmissionTemplate();
 template.appId = APPID;
 template.appKey = APPKEY;
-template.type = 1;
+template.type = 2;
 
 var transparent = template.getTransparent();
 //console.log(transparent);
