@@ -5,7 +5,8 @@ var publicTool = require('../publicTool/publicTools');
 var androidpush = require("../NodeProj/androidpush.js");
 
 exports.androidpush = function (datajson,response){
-    var message = querystring.parse(datajson).message
+    var message = querystring.parse(datajson).message;
+    console.log('message :' + message);
     if(message){
         var useridarr = querystring.parse(datajson).userid;
         var uarr = eval(useridarr);
