@@ -4,6 +4,7 @@
 var publicTool = require('../publicTool/publicTools');
 var androidpush = require("../NodeProj/androidpush.js");
 var querystring = require("querystring");
+var jpush = require("./JPush/androidJPush");
 
 exports.androidpush = function (datajson,response){
     var message = querystring.parse(datajson).message;
@@ -29,5 +30,6 @@ exports.androidpush = function (datajson,response){
 }
 
 function sendonepush(deviceid,message){
-    androidpush.androidpush(deviceid,message);
+   // androidpush.androidpush(deviceid,message);
+    jpush.androidJPush(deviceid,message);
 }
