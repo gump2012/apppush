@@ -1,0 +1,14 @@
+{
+"name": "xjbserver",
+"version": "0.0.1",
+"private": false,
+"scripts": {
+"start": "node index.js"
+},
+"dependencies": {
+"nodemailer": "*",
+"mongoose": "*",
+"request":"*",
+"jpush-sdk": "*"
+}
+}
