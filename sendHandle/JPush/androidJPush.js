@@ -2,7 +2,7 @@
  * Created by littest on 14/12/26.
  */
 var JPush = require("./JPush.js");
-var client = JPush.buildClient('47a3ddda34b2602fa9e17c01', 'd94f733358cca97b18b2cb98');
+var client = JPush.buildClient('239a318dc803cf7a6f96e50c', 'da3e8c98f99f8375fbf31d37');
 
 exports.androidJPush = function(deviceid,message){
     client.push().setPlatform('android')
