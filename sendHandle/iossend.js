@@ -6,7 +6,8 @@ var apn = require('apn');
 var querystring = require("querystring");
 
 exports.iossend = function (datajson,response){
-    var message = querystring.parse(datajson).message
+    var message = querystring.parse(datajson).message;
+    var sound = querystring.parse(datajson).sound;
     if(message){
         var useridarr = querystring.parse(datajson).userid;
         var uarr = eval(useridarr);
@@ -18,7 +19,7 @@ exports.iossend = function (datajson,response){
                 var deviceid = uarr[i];
                 if(deviceid){
                 console.log('deviceid is '+deviceid);
-                sendonepush(deviceid,message);
+                sendonepush(deviceid,message,sound);
                 }
                 else{
                     publicTool.returnErr(response,'用户id为空');
@@ -41,7 +42,7 @@ exports.iossend = function (datajson,response){
 
 }
 
-function sendonepush(deviceid,message){
+function sendonepush(deviceid,message,sound){
     var options = {cert:'/root/apppush/certificate/cert.pem',key:'/root/apppush/certificate/key.pem',passphrase:'1111'};
 
     var apnConnection = new apn.Connection(options);
@@ -50,7 +51,9 @@ function sendonepush(deviceid,message){
 
 //note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
     note.badge = 1;
-    note.sound = "ringing.m4a";
+    if(sound){
+        note.sound = sound;
+    }
     note.alert = message;
     note.payload = {'messageFrom': 'Caroline'};
     try{
