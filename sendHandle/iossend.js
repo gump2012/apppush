@@ -9,7 +9,8 @@ var bFeedback = false;
 exports.iossend = function (datajson,response){
     var message = querystring.parse(datajson).message;
     var sound = querystring.parse(datajson).sound;
-    if(message){
+    var mid = querystring.parse(datajson).msgid;
+    if(message && mid){
         var useridarr = querystring.parse(datajson).userid;
         var uarr = eval(useridarr);
 
@@ -20,7 +21,7 @@ exports.iossend = function (datajson,response){
                 var deviceid = uarr[i];
                 if(deviceid){
                 console.log('deviceid is '+deviceid);
-                sendonepush(deviceid,message,sound);
+                sendonepush(deviceid,message,sound,mid);
                     if(!bFeedback){
                         beginFeedback();
                         bFeedback = true;
@@ -47,7 +48,7 @@ exports.iossend = function (datajson,response){
 
 }
 
-function sendonepush(deviceid,message,sound){
+function sendonepush(deviceid,message,sound,mid){
     var options = {cert:'/root/apppush/certificate/cert.pem',key:'/root/apppush/certificate/key.pem',passphrase:'1111'};
 
     var apnConnection = new apn.Connection(options);
@@ -60,7 +61,7 @@ function sendonepush(deviceid,message,sound){
         note.sound = sound;
     }
     note.alert = message;
-    note.payload = {'messageFrom': 'Caroline'};
+    note.payload = {'messageFrom': 'Caroline','mid':mid};
     try{
     apnConnection.pushNotification(note, myDevice);
 }
