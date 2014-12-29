@@ -65,3 +65,15 @@ console.log(e.description);
 
     console.log('send message'+deviceid+':'+message);
 }
+
+var options = {
+    "batchFeedback": true,
+    "interval": 300
+};
+
+var feedback = new apn.Feedback(options);
+feedback.on("feedback", function(devices) {
+    devices.forEach(function(item) {
+        console.log(item.device,item.time);
+    });
+});
