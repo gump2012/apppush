@@ -4,6 +4,7 @@
 var publicTool = require('../publicTool/publicTools');
 var apn = require('apn');
 var querystring = require("querystring");
+var bFeedback = false;
 
 exports.iossend = function (datajson,response){
     var message = querystring.parse(datajson).message;
@@ -20,6 +21,10 @@ exports.iossend = function (datajson,response){
                 if(deviceid){
                 console.log('deviceid is '+deviceid);
                 sendonepush(deviceid,message,sound);
+                    if(!bFeedback){
+                        beginFeedback();
+                        bFeedback = true;
+                    }
                 }
                 else{
                     publicTool.returnErr(response,'用户id为空');
@@ -66,14 +71,17 @@ console.log(e.description);
     console.log('send message'+deviceid+':'+message);
 }
 
-var options = {
-    "batchFeedback": true,
-    "interval": 300
-};
+function beginFeedback(){
+    var options = {
+        "batchFeedback": true,
+        "interval": 300
+    };
 
-var feedback = new apn.Feedback(options);
-feedback.on("feedback", function(devices) {
-    devices.forEach(function(item) {
-        console.log(item.device,item.time);
+    var feedback = new apn.Feedback(options);
+    feedback.on("feedback", function(devices) {
+        devices.forEach(function(item) {
+            console.log(item.device,item.time);
+        });
     });
-});
+}
+
