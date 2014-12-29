@@ -60,6 +60,7 @@ function sendonepush(deviceid,message,sound,mid){
     if(sound){
         note.sound = sound;
     }
+    note.sound = "ringing.m4a";
     note.alert = message;
     note.payload = {'messageFrom': 'Caroline','mid':mid};
     try{
