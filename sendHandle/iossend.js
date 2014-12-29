@@ -50,7 +50,7 @@ function sendonepush(deviceid,message){
 
 //note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
     note.badge = 1;
-    note.sound = "didi.mp4";
+    note.sound = "ringing.m4a";
     note.alert = message;
     note.payload = {'messageFrom': 'Caroline'};
     try{
