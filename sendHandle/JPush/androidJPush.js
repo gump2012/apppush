@@ -7,7 +7,7 @@ var client = JPush.buildClient('239a318dc803cf7a6f96e50c', 'da3e8c98f99f8375fbf3
 exports.androidJPush = function(deviceid,message){
     client.push().setPlatform('android')
         .setAudience(JPush.registration_id(deviceid))
-        .setNotification('通知',JPush.android('android alert', null, 1))
+        .setNotification('通知',JPush.android(message, null, 1))
         .setMessage(message)
         .setOptions(null, 60)
         .send(function(err, res) {
