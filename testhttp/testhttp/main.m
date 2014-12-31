@@ -16,7 +16,7 @@ int main(int argc, const char * argv[]) {
         // insert code here...
         NSLog(@"Hello, World!");
         
-        NSURL *url = [NSURL URLWithString:@"http://www.kkk885.cn/send"];
+        NSURL *url = [NSURL URLWithString:@"http://latest.toupai360.com:2005/send"];
         
         //第二步，创建请求
         
