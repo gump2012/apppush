@@ -16,6 +16,15 @@ function resend(){
     for(var i = 0;i < pushdb.messagearr.length;++i){
         resendOne(pushdb.messagearr[i]);
     }
+
+    if(pushdb.temparr.length > 0){
+        for(var i = 0; i < pushdb.temparr.length;++i){
+            pushdb.messagearr.push(pushdb.temparr[i]);
+        }
+
+        pushdb.temparr.clear();
+    }
+
 }
 
 function stopSend(){

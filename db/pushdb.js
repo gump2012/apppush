@@ -16,12 +16,12 @@ exports.creatdb = function(){
     db.once('open',function callback(){
         console.log('db is open success!');
 
-        pushdb.creatdb(mongoose);
+        pushdb.creatdb();
 
-        initdb(mongoose);
+        initdb();
     });
 }
 
-function initdb(mongoose){
-    pushdb.initdb(mongoose);
+function initdb(){
+    pushdb.initdb();
 }

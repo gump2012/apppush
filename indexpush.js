@@ -7,6 +7,7 @@ var index = require("./indexHandle/indexHandle");
 var sendpush = require('./sendHandle/sendHandles');
 var db = require('./db/pushdb');
 var receiveMsg = require('./receiveMsgHandle/receiveMsgHandle');
+var resend = require('./resendMessage/resendMsg');
 
 var handle = {};
 handle["/"] = index.start;
@@ -15,3 +16,4 @@ handle['/receivemsg'] = receiveMsg.receiveMsg;
 
 server.start(router.route,handle);
 db.creatdb();
+resend.startSend();

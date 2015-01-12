@@ -2,7 +2,9 @@
  * Created by littest on 15/1/12.
  */
 
-exports.createdb = function (mongoose){
+var mongoose = require('mongoose');
+
+exports.createdb = function (){
     var schema = new mongoose.Schema({
         mid     :{
             type: String,
@@ -19,8 +21,10 @@ exports.createdb = function (mongoose){
 
 var message = [];
 exports.messagearr = message;
+var temp = [];
+exports.temparr = temp;
 
-exports.initdb = function(mongoose){
+exports.initdb = function(){
     var messagemodel = mongoose.model('pushmessage');
     if(messagemodel){
         messagemodel.find({},function(err,docs){
@@ -32,9 +36,53 @@ exports.initdb = function(mongoose){
 }
 
 exports.save = function(msg){
-
+    var messagemodel = mongoose.model('pushmessage');
+    if(messagemodel){
+        messagemodel.findOne({mid:msg.mid},function(err,doc){
+            if(!doc){
+                var messageEntity = new messagemodel(msg);
+                messageEntity.save(function( err, silence ) {
+                    if( err )
+                    {
+                        console.log(err);
+                    }else{
+                        temp.push(msg);
+                    }
+                });
+            }
+        });
+    }
 }
 
 exports.delete = function(msg){
+    var messagemodel = mongoose.model('pushmessage');
+    if(messagemodel){
+        messagemodel.findOne({mid:msg.mid},function(err,doc){
+            if(doc){
+                messagemodel.remove({_id:doc._id},function(err){
+                    if(err){
+                        console.log("remove err  " + err);
+                    }else{
+                        removeFromArr(msg);
+                    }
+                });
+            }
+        });
+    }
+}
 
+function removeFromArr(msg){
+    for(var i = 0 ; i < temp.length;++i){
+        if(temp[i].mid == msg.mid){
+            temp.remove(i);
+            break;
+        }
+    }
+
+    for(var i = 0 ; i < message.length;++i){
+        if(message[i].mid == msg.mid){
+            message.remove(i);
+            break;
+        }
+    }
 }
