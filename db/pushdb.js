@@ -16,7 +16,7 @@ exports.creatdb = function(){
     db.once('open',function callback(){
         console.log('db is open success!');
 
-        apppushdb.creat();
+        apppushdb.createmydb();
 
         initdb();
     });

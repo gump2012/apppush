@@ -4,7 +4,7 @@
 
 var mongoose = require('mongoose');
 
-exports.create = function (){
+exports.createmydb = function (){
     var schema = new mongoose.Schema({
         mid     :{
             type: String,
