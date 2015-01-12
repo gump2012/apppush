@@ -4,6 +4,7 @@
 var publicTool = require('../publicTool/publicTools');
 var apn = require('apn');
 var querystring = require("querystring");
+var apppushdb = require('../db/apppush/apppushdb');
 var bFeedback = false;
 
 exports.iossend = function (datajson,response){
@@ -21,6 +22,14 @@ exports.iossend = function (datajson,response){
                 var deviceid = uarr[i];
                 if(deviceid){
                 console.log('deviceid is '+deviceid);
+                var msg = {
+                    mid     :mid
+                    ,phone              :deviceid
+                    ,message            :message
+                    ,state              :0
+                    ,device             :'ios'
+                }
+                apppushdb.save(msg);
                 sendonepush(deviceid,message,sound,mid);
                     if(!bFeedback){
                         beginFeedback();
@@ -36,7 +45,6 @@ exports.iossend = function (datajson,response){
             if(!isnull){
                 publicTool.returnOK(response,'');
             }
-
         }
         else{
             publicTool.returnErr(response,'没有用户id');

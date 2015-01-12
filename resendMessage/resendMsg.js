@@ -3,7 +3,7 @@
  */
 
 var config = require('../config/config');
-var pushdb = require('../db/paapush/apppushdb');
+var pushdb = require('../db/apppush/apppushdb');
 var sendhandle = require('../sendHandle/sendHandles');
 
 var timeout;

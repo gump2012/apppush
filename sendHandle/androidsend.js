@@ -5,9 +5,11 @@ var publicTool = require('../publicTool/publicTools');
 var androidpush = require("../NodeProj/androidpush.js");
 var querystring = require("querystring");
 var jpush = require("./JPush/androidJPush");
+var apppushdb = require('../db/apppush/apppushdb');
 
 exports.androidpush = function (datajson,response){
     var message = querystring.parse(datajson).message;
+    var mid = querystring.parse(datajson).msgid;
     console.log('message :' + message);
     if(message){
         var useridarr = querystring.parse(datajson).userid;
@@ -15,6 +17,14 @@ exports.androidpush = function (datajson,response){
         if(uarr && uarr.length > 0){
             for(var i = 0; i < uarr.length; ++i){
                 var deviceid = uarr[i];
+                var msg = {
+                    mid     :mid
+                    ,phone              :deviceid
+                    ,message            :message
+                    ,state              :0
+                    ,device             :'android'
+                }
+                apppushdb.save(msg);
                 sendonepush(deviceid,message);
             }
 
@@ -31,6 +41,7 @@ exports.androidpush = function (datajson,response){
 
 function sendonepush(deviceid,message){
    // androidpush.androidpush(deviceid,message);
+
     jpush.androidJPush(deviceid,message);
 }
 
