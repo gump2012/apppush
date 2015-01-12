@@ -4,7 +4,7 @@
 var mongoose = require('mongoose');
 var publictool = require('../publicTool/publicTools');
 
-var pushdb  = require('./apppushdb');
+var pushdb  = require('./apppush/apppushdb');
 
 exports.creatdb = function(){
     var strurl = 'mongodb://' + publictool.releaseip + ':27017/apppush';
