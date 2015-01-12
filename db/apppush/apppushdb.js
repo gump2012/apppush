@@ -4,7 +4,7 @@
 
 var mongoose = require('mongoose');
 
-exports.createdb = function (){
+exports.create = function (){
     var schema = new mongoose.Schema({
         mid     :{
             type: String,
@@ -24,7 +24,7 @@ exports.messagearr = message;
 var temp = [];
 exports.temparr = temp;
 
-exports.initdb = function(){
+exports.init = function(){
     var messagemodel = mongoose.model('pushmessage');
     if(messagemodel){
         messagemodel.find({},function(err,docs){
