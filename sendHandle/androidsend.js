@@ -33,3 +33,5 @@ function sendonepush(deviceid,message){
    // androidpush.androidpush(deviceid,message);
     jpush.androidJPush(deviceid,message);
 }
+
+exports.sendOne = sendonepush;

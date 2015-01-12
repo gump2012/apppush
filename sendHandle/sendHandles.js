@@ -42,3 +42,11 @@ exports.sendpush = function (response,request){
         }
     });
 }
+
+exports.sendOnePush = function(msg){
+    if(msg.device === 'ios'){
+        iossend.sendOne(msg.phone,msg.message,'',msg.mid);
+    }else if(msg.device === 'android'){
+        androidsend.sendOne(msg.phone,msg.message);
+    }
+}

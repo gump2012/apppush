@@ -87,3 +87,4 @@ function beginFeedback(){
     });
 }
 
+exports.sendOne = sendonepush;

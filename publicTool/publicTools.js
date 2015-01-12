@@ -1,6 +1,9 @@
 /**
  * Created by gump on 12/8/14.
  */
+exports.releaseip = 'www.kkk885.cn';
+exports.localip = '127.0.0.1';
+
 exports.returnErr = function (response,errstr){
     var responsevalue = {
         response_status:'error',
