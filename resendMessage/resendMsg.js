@@ -22,7 +22,7 @@ function resend(){
             pushdb.messagearr.push(pushdb.temparr[i]);
         }
 
-        pushdb.temparr.clear();
+        pushdb.temparr = [];
     }
 
 }
