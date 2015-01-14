@@ -17,6 +17,8 @@ exports.androidpush = function (datajson,response){
         if(uarr && uarr.length > 0){
             for(var i = 0; i < uarr.length; ++i){
                 var deviceid = uarr[i];
+                var isnull = false;
+                if(deviceid){
                 var msg = {
                     mid     :mid
                     ,phone              :deviceid
@@ -26,9 +28,16 @@ exports.androidpush = function (datajson,response){
                 }
                 //apppushdb.save(msg);
                 sendonepush(deviceid,message);
+                }else{
+                    publicTool.returnErr(response,'用户id为空');
+                    isnull = true;
+                    break;
+                }
             }
 
-            publicTool.returnOK(response,'');
+            if(!isnull){
+                publicTool.returnOK(response,'');
+            }
         }
         else{
             publicTool.returnErr(response,'没有用户id');
