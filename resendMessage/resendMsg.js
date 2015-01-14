@@ -13,6 +13,9 @@ exports.startSend = function(){
 }
 
 function resend(){
+    console.log('resend');
+    console.log('messagearr  '+pushdb.messagearr.length);
+    console.log('temparr ' + pushdb.temparr.length);
     for(var i = 0;i < pushdb.messagearr.length;++i){
         resendOne(pushdb.messagearr[i]);
     }

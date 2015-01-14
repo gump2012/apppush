@@ -28,6 +28,7 @@ exports.init = function(){
     var messagemodel = mongoose.model('pushmessage');
     if(messagemodel){
         messagemodel.find({},function(err,docs){
+	console.log(docs.length);
             for(var i = 0; i < docs.length;++i){
                 message.push(docs[i]);
             }
