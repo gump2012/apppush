@@ -9,6 +9,7 @@
 #define MY_5C      92e52b79fc57c25ef504dc9e983ecb17a4f081a146e60636ca995de41e2aa82a
 #define MY_JPUSH_XIMI  07020f2aa48
 #define MY_IPAD 57185921673ee1bba1a238a88624faf55f71725cc8b0354390b40dbff1caaff8
+#define MY_JPUSH_TAIDIAN 030c0397dd1
 
 #import <Foundation/Foundation.h>
 
@@ -25,7 +26,7 @@ int main(int argc, const char * argv[]) {
         
         [request setHTTPMethod:@"POST"];//设置请求方式为POST，默认为GET
         
-        NSString *str =@"msgid=6&userid=['92e52b79fc57c25ef504dc9e983ecb17a4f081a146e60636ca995de41e2aa82a']&message=哦也&msgtype=txt&deviceSysType=ios\
+        NSString *str =@"msgid=6&userid=['030c0397dd1']&message=哦也&msgtype=txt&deviceSysType=android\
 &sound=dudu.m4a";
      //设置参数
         

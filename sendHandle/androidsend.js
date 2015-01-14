@@ -24,7 +24,7 @@ exports.androidpush = function (datajson,response){
                     ,state              :0
                     ,device             :'android'
                 }
-                apppushdb.save(msg);
+                //apppushdb.save(msg);
                 sendonepush(deviceid,message);
             }
 
