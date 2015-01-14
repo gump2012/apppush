@@ -11,8 +11,8 @@ var resend = require('./resendMessage/resendMsg');
 
 var handle = {};
 handle["/"] = index.start;
-handle['send'] = sendpush.sendpush;
-handle['receivemsg'] = receiveMsg.receiveMsg;
+handle['/send'] = sendpush.sendpush;
+handle['/receivemsg'] = receiveMsg.receiveMsg;
 
 server.start(router.route,handle);
 db.creatdb();
