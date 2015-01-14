@@ -74,14 +74,14 @@ exports.delete = function(msg){
 function removeFromArr(msg){
     for(var i = 0 ; i < temp.length;++i){
         if(temp[i].mid == msg.mid){
-            temp.remove(i);
+            temp.splice(i,1);
             break;
         }
     }
 
     for(var i = 0 ; i < message.length;++i){
         if(message[i].mid == msg.mid){
-            message.remove(i);
+            message.splice(i,1);
             break;
         }
     }
