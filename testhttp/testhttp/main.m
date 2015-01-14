@@ -8,6 +8,7 @@
 #define  MY_XIAOMI  93f1dc88b6326bf00db25c7e7163930b
 #define MY_5C      92e52b79fc57c25ef504dc9e983ecb17a4f081a146e60636ca995de41e2aa82a
 #define MY_JPUSH_XIMI  07020f2aa48
+#define MY_IPAD 57185921673ee1bba1a238a88624faf55f71725cc8b0354390b40dbff1caaff8
 
 #import <Foundation/Foundation.h>
 
