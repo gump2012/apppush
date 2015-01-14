@@ -12,12 +12,14 @@ exports.receiveMsg = function (response,request){
     var phone = querystring.parse(arg).phone;
     var message = querystring.parse(arg).message;
     var state = querystring.parse(arg).state;
+    var device = querystring.parse(arg).device;
 
     var msg = {
         mid:mid
         ,phone:phone
         ,message:message
         ,state:state
+        ,device:device
     }
 
     pushdb.delete(msg);

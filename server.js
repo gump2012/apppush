@@ -5,7 +5,8 @@ var http = require("http");
 
 exports.start = function (route,handle){
     function onRequest(request,response){
-        route(handle,request.url,response,request);
+        var pathname = url.parse(request.url).pathname;
+        route(handle,pathname,response,request);
     }
 
     http.createServer(onRequest).listen(80);
