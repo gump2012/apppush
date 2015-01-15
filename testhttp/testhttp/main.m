@@ -18,7 +18,7 @@ int main(int argc, const char * argv[]) {
         // insert code here...
         NSLog(@"Hello, World!");
         
-        NSURL *url = [NSURL URLWithString:@"http://www.kkk885.cn/send"];
+        NSURL *url = [NSURL URLWithString:@"http://114.215.111.111/send"];
         
         //第二步，创建请求
         
@@ -26,7 +26,7 @@ int main(int argc, const char * argv[]) {
         
         [request setHTTPMethod:@"POST"];//设置请求方式为POST，默认为GET
         
-        NSString *str =@"msgid=6&userid=['030c0397dd1']&message=哦也&msgtype=txt&deviceSysType=android\
+        NSString *str =@"msgid=9&userid=['07020f2aa48']&message=天啊&msgtype=txt&deviceSysType=android\
 &sound=dudu.m4a";
      //设置参数
         

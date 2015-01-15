@@ -20,7 +20,7 @@ exports.iossend = function (datajson,response){
             var isnull = false;
             for(var i = 0; i < uarr.length; ++i){
                 var deviceid = uarr[i];
-                if(deviceid && deviceid.length > 0){
+                if(deviceid && deviceid.length > 0 && deviceid != 'null'){
                 console.log('deviceid is '+deviceid);
                 var msg = {
                     mid     :mid
