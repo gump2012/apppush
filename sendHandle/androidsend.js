@@ -10,6 +10,9 @@ var apppushdb = require('../db/apppush/apppushdb');
 exports.androidpush = function (datajson,response){
     var message = querystring.parse(datajson).message;
     var mid = querystring.parse(datajson).msgid;
+    var addressor = querystring.parse(datajson).addressor;
+    var rank = querystring.parse(datajson).rank;
+    var truncate = querystring.parse(datajson).truncate;
     console.log('message :' + message);
     if(message){
         var useridarr = querystring.parse(datajson).userid;
@@ -25,9 +28,12 @@ exports.androidpush = function (datajson,response){
                     ,message            :message
                     ,state              :0
                     ,device             :'android'
+                    ,addressor          :addressor
+                    ,rank               :new Number(rank)
+                    ,truncate           :new Number(truncate)
                 }
                 //apppushdb.save(msg);
-                sendonepush(deviceid,message);
+                sendonepush(deviceid,msg);
                 }else{
                     publicTool.returnErr(response,'用户id为空');
                     isnull = true;
@@ -48,10 +54,10 @@ exports.androidpush = function (datajson,response){
     }
 }
 
-function sendonepush(deviceid,message){
+function sendonepush(deviceid,msg){
    // androidpush.androidpush(deviceid,message);
 
-    jpush.androidJPush(deviceid,message);
+    jpush.androidJPush(deviceid,msg);
 }
 
 exports.sendOne = sendonepush;

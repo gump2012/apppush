@@ -14,6 +14,9 @@ exports.createmydb = function (){
         ,message            :String
         ,state              :Number
         ,device             :String
+        ,addressor          :String
+        ,rank               :Number
+        ,truncate           :Number
     });
 
     mongoose.model('pushmessage',schema);

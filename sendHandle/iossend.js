@@ -11,6 +11,9 @@ exports.iossend = function (datajson,response){
     var message = querystring.parse(datajson).message;
     var sound = querystring.parse(datajson).sound;
     var mid = querystring.parse(datajson).msgid;
+    var addressor = querystring.parse(datajson).addressor;
+    var rank = querystring.parse(datajson).rank;
+    var truncate = querystring.parse(datajson).truncate;
     if(message && mid){
         var useridarr = querystring.parse(datajson).userid;
         var uarr = eval(useridarr);
@@ -28,9 +31,12 @@ exports.iossend = function (datajson,response){
                     ,message            :message
                     ,state              :0
                     ,device             :'ios'
+                    ,addressor          :addressor
+                    ,rank               :new Number(rank)
+                    ,truncate           :new Number(truncate)
                 }
-                apppushdb.save(msg);
-                sendonepush(deviceid,message,sound,mid);
+                //apppushdb.save(msg);
+                sendonepush(deviceid,msg,sound);
                     if(!bFeedback){
                         beginFeedback();
                         bFeedback = true;
@@ -56,7 +62,7 @@ exports.iossend = function (datajson,response){
 
 }
 
-function sendonepush(deviceid,message,sound,mid){
+function sendonepush(deviceid,msg,sound){
     var options = {cert:'/root/apppush/certificate/cert.pem',key:'/root/apppush/certificate/key.pem',passphrase:'1111'};
 
     var apnConnection = new apn.Connection(options);
@@ -68,9 +74,13 @@ function sendonepush(deviceid,message,sound,mid){
     if(sound){
         note.sound = sound;
     }
-    note.sound = "ringing.m4a";
-    note.alert = message;
-    note.payload = {'messageFrom': 'Caroline','mid':mid};
+    if(msg.rank == 1) {
+        note.sound = "ringing.m4a";
+    }else{
+        note.sound = "";
+    }
+    note.alert = msg.message;
+    note.payload = {'messageFrom': 'Caroline','mid':msg.mid,'truncate':msg.truncate,'addressor':msg.addressor};
     try{
     apnConnection.pushNotification(note, myDevice);
 }
