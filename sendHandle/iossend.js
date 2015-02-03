@@ -50,8 +50,8 @@ exports.iossend = function (datajson,response,timeout){
                 }
             }
             if(!isnull){
-                clearTimeout(timeout);
-                publicTool.returnOK(response,'');
+               clearTimeout(timeout);
+               publicTool.returnOK(response,'');
             }
         }
         else{
