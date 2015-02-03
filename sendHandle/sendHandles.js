@@ -20,6 +20,10 @@ exports.sendpush = function (response,request){
     });
 
     request.addListener('end', function() {
+
+        clearTimeout(response_timer);
+        publicTool.returnOK(response,'');
+
         console.log(requestData);
         if(requestData){
             var datajson;
@@ -33,13 +37,13 @@ exports.sendpush = function (response,request){
                         androidsend.androidpush(requestData,response,response_timer);
                     }
                     else{
-                        clearTimeout(response_timer);
-                        publicTool.returnErr(response,'没找到设备');
+                        //clearTimeout(response_timer);
+                        //publicTool.returnErr(response,'没找到设备');
                     }
                 }
                 else{
-                    clearTimeout(response_timer);
-                    publicTool.returnErr(response,'没有设备类型');
+                    //clearTimeout(response_timer);
+                    //returnErr(response,'没有设备类型');
                 }
             } catch (e) {
                 // An error has occured, handle it, by e.g. logging it
@@ -47,8 +51,8 @@ exports.sendpush = function (response,request){
                 console.log(e);
             }
         }else{
-            clearTimeout(response_timer);
-            publicTool.returnErr(response,'没有post数据');
+            //clearTimeout(response_timer);
+            //publicTool.returnErr(response,'没有post数据');
         }
     });
 }

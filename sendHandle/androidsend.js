@@ -35,26 +35,26 @@ exports.androidpush = function (datajson,response,timeout){
                 //apppushdb.save(msg);
                 sendonepush(deviceid,msg);
                 }else{
-                    clearTimeout(timeout);
-                    publicTool.returnErr(response,'用户id为空');
+                    //clearTimeout(timeout);
+                    //publicTool.returnErr(response,'用户id为空');
                     isnull = true;
                     break;
                 }
             }
 
             if(!isnull){
-                clearTimeout(timeout);
-                publicTool.returnOK(response,'');
+                //clearTimeout(timeout);
+                //publicTool.returnOK(response,'');
             }
         }
         else{
-            clearTimeout(timeout);
-            publicTool.returnErr(response,'没有用户id');
+            //clearTimeout(timeout);
+           // publicTool.returnErr(response,'没有用户id');
         }
     }
     else{
-        clearTimeout(timeout);
-        publicTool.returnErr(response,'没有发送内容');
+        //clearTimeout(timeout);
+        //publicTool.returnErr(response,'没有发送内容');
     }
 }
 
