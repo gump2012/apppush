@@ -13,7 +13,7 @@ exports.sendpush = function (response,request){
         publicTool.returnErr(response,'超时了');
         request.destroy();
         console.log('Response Timeout.');
-    }, 6000);
+    }, 20000);
 
     request.addListener('data', function(postDataChunk) {
         requestData += postDataChunk;
