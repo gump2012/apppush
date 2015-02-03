@@ -27,7 +27,7 @@ int main(int argc, const char * argv[]) {
         [request setHTTPMethod:@"POST"];//设置请求方式为POST，默认为GET
         
         NSString *str =@"msgid=9&userid=['92e52b79fc57c25ef504dc9e983ecb17a4f081a146e60636ca995de41e2aa82a']&message=天啊&msgtype=txt&deviceSysType=ios\
-&sound=dudu.m4a&addressor=frank&rank=1&truncate=0";
+&sound=dudu.m4a&addressor=frank&rank=2&truncate=0";
      //设置参数
         
         NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
