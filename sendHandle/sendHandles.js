@@ -8,6 +8,13 @@ var querystring = require("querystring");
 
 exports.sendpush = function (response,request){
     var requestData = '';
+
+    var response_timer = setTimeout(function() {
+        publicTool.returnErr(response,'超时了');
+        request.destroy();
+        console.log('Response Timeout.');
+    }, 6000);
+
     request.addListener('data', function(postDataChunk) {
         requestData += postDataChunk;
     });
@@ -20,16 +27,18 @@ exports.sendpush = function (response,request){
                 var devicetype = querystring.parse(requestData).deviceSysType;
                 if(devicetype){
                     if(devicetype === 'ios'){
-                        iossend.iossend(requestData,response);
+                        iossend.iossend(requestData,response,response_timer);
                     }
                     else if(devicetype === 'android'){
-                        androidsend.androidpush(requestData,response);
+                        androidsend.androidpush(requestData,response,response_timer);
                     }
                     else{
+                        clearTimeout(response_timer);
                         publicTool.returnErr(response,'没找到设备');
                     }
                 }
                 else{
+                    clearTimeout(response_timer);
                     publicTool.returnErr(response,'没有设备类型');
                 }
             } catch (e) {
@@ -38,6 +47,7 @@ exports.sendpush = function (response,request){
                 console.log(e);
             }
         }else{
+            clearTimeout(response_timer);
             publicTool.returnErr(response,'没有post数据');
         }
     });

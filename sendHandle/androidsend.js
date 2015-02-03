@@ -7,7 +7,7 @@ var querystring = require("querystring");
 var jpush = require("./JPush/androidJPush");
 var apppushdb = require('../db/apppush/apppushdb');
 
-exports.androidpush = function (datajson,response){
+exports.androidpush = function (datajson,response,timeout){
     var message = querystring.parse(datajson).message;
     var mid = querystring.parse(datajson).msgid;
     var addressor = querystring.parse(datajson).addressor;
@@ -35,6 +35,7 @@ exports.androidpush = function (datajson,response){
                 //apppushdb.save(msg);
                 sendonepush(deviceid,msg);
                 }else{
+                    clearTimeout(timeout);
                     publicTool.returnErr(response,'用户id为空');
                     isnull = true;
                     break;
@@ -42,14 +43,17 @@ exports.androidpush = function (datajson,response){
             }
 
             if(!isnull){
+                clearTimeout(timeout);
                 publicTool.returnOK(response,'');
             }
         }
         else{
+            clearTimeout(timeout);
             publicTool.returnErr(response,'没有用户id');
         }
     }
     else{
+        clearTimeout(timeout);
         publicTool.returnErr(response,'没有发送内容');
     }
 }
