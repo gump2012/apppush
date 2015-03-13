@@ -9,11 +9,14 @@ var bFeedback = false;
 
 exports.iossend = function (datajson,response,timeout){
     var message = querystring.parse(datajson).message;
-    var sound = querystring.parse(datajson).sound;
+    //var sound = querystring.parse(datajson).sound;
     var mid = querystring.parse(datajson).msgid;
     var addressor = querystring.parse(datajson).addressor;
     var rank = querystring.parse(datajson).rank;
     var truncate = querystring.parse(datajson).truncate;
+    var msgtype = querystring.parse(datajson).msgtype;
+    var url = querystring.parse(datajson).url;
+    var sendTime = querystring.parse(datajson).sendTime;
     if(message && mid){
         var useridarr = querystring.parse(datajson).userid;
         var uarr = eval(useridarr);
@@ -34,6 +37,9 @@ exports.iossend = function (datajson,response,timeout){
                     ,addressor          :addressor
                     ,rank               :new Number(rank)
                     ,truncate           :new Number(truncate)
+                    ,msgtype            :msgtype
+                    ,url                :url
+                    ,sendTime           :sendTime
                 }
                 //apppushdb.save(msg);
                 sendonepush(deviceid,msg,sound);
@@ -43,25 +49,21 @@ exports.iossend = function (datajson,response,timeout){
                     }
                 }
                 else{
-                    //clearTimeout(timeout);
-                    //publicTool.returnErr(response,'用户id为空');
+                    publicTool.returnErr(response,'用户id为空');
                     isnull = true;
                     break;
                 }
             }
             if(!isnull){
-               //clearTimeout(timeout);
-               //publicTool.returnOK(response,'');
+               publicTool.returnOK(response,'');
             }
         }
         else{
-            //clearTimeout(timeout);
-           // publicTool.returnErr(response,'没有用户id');
+            publicTool.returnErr(response,'没有用户id');
         }
     }
     else{
-       // clearTimeout(timeout);
-        //publicTool.returnErr(response,'没有发送内容');
+        publicTool.returnErr(response,'没有发送内容');
     }
 
 }
@@ -84,7 +86,16 @@ function sendonepush(deviceid,msg,sound){
         note.sound = "";
     }
     note.alert = msg.message;
-    note.payload = {'messageFrom': 'Caroline','mid':msg.mid,'truncate':msg.truncate,'addressor':msg.addressor};
+    note.payload = {'messageFrom': 'Caroline'
+        ,'mid':msg.mid
+        ,'truncate':msg.truncate
+        ,'addressor':msg.addressor
+        ,'rank':msg.rank
+        ,'msgtype':msg.msgtype
+        ,'type':msg.type
+        ,'url':msg.url
+        ,'sendtime':msg.sendTime
+    };
     try{
     apnConnection.pushNotification(note, myDevice);
 }

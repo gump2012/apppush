@@ -26,7 +26,6 @@ exports.sendpush = function (response,request){
 
         console.log(requestData);
         if(requestData){
-            var datajson;
             try {
                 var devicetype = querystring.parse(requestData).deviceSysType;
                 if(devicetype){
@@ -37,22 +36,19 @@ exports.sendpush = function (response,request){
                         androidsend.androidpush(requestData,response,response_timer);
                     }
                     else{
-                        //clearTimeout(response_timer);
-                        //publicTool.returnErr(response,'没找到设备');
+                        publicTool.returnErr(response,'没找到设备');
                     }
                 }
                 else{
-                    //clearTimeout(response_timer);
-                    //returnErr(response,'没有设备类型');
+                    returnErr(response,'没有设备类型');
                 }
             } catch (e) {
                 // An error has occured, handle it, by e.g. logging it
-		console.log('ri');
+		        console.log('ri');
                 console.log(e);
             }
         }else{
-            //clearTimeout(response_timer);
-            //publicTool.returnErr(response,'没有post数据');
+            publicTool.returnErr(response,'没有post数据');
         }
     });
 }
